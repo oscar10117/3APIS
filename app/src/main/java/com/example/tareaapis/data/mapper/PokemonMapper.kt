@@ -1,8 +1,11 @@
 package com.example.tareaapis.data.mapper
 
 import com.example.tareaapis.data.dto.NamedResourceDto
+import com.example.tareaapis.data.local.FavoritoEntity
+import com.example.tareaapis.data.local.PokemonCacheEntity
 import com.example.tareaapis.data.dto.PokemonDto
 import com.example.tareaapis.data.dto.PokemonSpeciesDto
+import com.example.tareaapis.domain.model.FavoritePokemon
 import com.example.tareaapis.domain.model.Pokemon
 import com.example.tareaapis.domain.model.PokemonSummary
 import com.example.tareaapis.domain.model.Stat
@@ -15,6 +18,17 @@ fun NamedResourceDto.toPokemonSummary(): PokemonSummary {
     val id = url.idFromUrl()
     return PokemonSummary(id = id, name = name.prettify(), imageUrl = "$ARTWORK_URL/$id.png")
 }
+
+// Room <-> modelo: las pantallas trabajan con PokemonSummary, nunca con entidades
+fun FavoritoEntity.toSummary(): PokemonSummary = PokemonSummary(id = id, name = nombre, imageUrl = imagenUrl)
+
+fun FavoritoEntity.toFavorite(): FavoritePokemon = FavoritePokemon(pokemon = toSummary(), note = nota)
+
+fun PokemonSummary.toFavoritoEntity(): FavoritoEntity = FavoritoEntity(id = id, nombre = name, imagenUrl = imageUrl)
+
+fun PokemonCacheEntity.toSummary(): PokemonSummary = PokemonSummary(id = id, name = nombre, imageUrl = imagenUrl)
+
+fun PokemonSummary.toCacheEntity(): PokemonCacheEntity = PokemonCacheEntity(id = id, nombre = name, imagenUrl = imageUrl)
 
 // PokeAPI devuelve altura en decímetros y peso en hectogramos
 fun PokemonDto.toDomain(species: PokemonSpeciesDto): Pokemon = Pokemon(

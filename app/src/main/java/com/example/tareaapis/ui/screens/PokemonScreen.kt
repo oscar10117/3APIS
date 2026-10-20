@@ -7,11 +7,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.example.tareaapis.domain.model.Pokemon
@@ -24,10 +26,17 @@ import com.example.tareaapis.ui.components.PillSection
 import com.example.tareaapis.ui.components.PropertySection
 import com.example.tareaapis.ui.components.SectionCard
 import com.example.tareaapis.ui.components.StatsSection
+import com.example.tareaapis.ui.viewmodel.FavoritesViewModel
 import com.example.tareaapis.ui.viewmodel.PokemonViewModel
 
 @Composable
-fun PokemonScreen(modifier: Modifier = Modifier, viewModel: PokemonViewModel = viewModel()) {
+fun PokemonScreen(
+    modifier: Modifier = Modifier,
+    viewModel: PokemonViewModel = viewModel(factory = PokemonViewModel.Factory),
+    favoritesViewModel: FavoritesViewModel = viewModel()
+) {
+    val favoriteIds by favoritesViewModel.favoriteIds.collectAsStateWithLifecycle()
+
     CatalogScreen(
         viewModel = viewModel,
         searchPlaceholder = "Buscar por nombre o número",
@@ -40,15 +49,29 @@ fun PokemonScreen(modifier: Modifier = Modifier, viewModel: PokemonViewModel = v
                 subtitle = pokemon.id.toDexNumber(),
                 imageUrl = pokemon.imageUrl,
                 background = MaterialTheme.colorScheme.surfaceVariant,
-                onClick = onClick
+                onClick = onClick,
+                isFavorite = pokemon.id in favoriteIds,
+                onFavoriteClick = { favoritesViewModel.toggle(pokemon) }
             )
         },
-        detailContent = { pokemon, onBack -> PokemonDetail(pokemon, onBack) }
+        detailContent = { pokemon, onBack ->
+            PokemonDetail(
+                pokemon = pokemon,
+                onBack = onBack,
+                isFavorite = pokemon.id in favoriteIds,
+                onToggleFavorite = { favoritesViewModel.toggle(pokemon.toSummary()) }
+            )
+        }
     )
 }
 
 @Composable
-private fun PokemonDetail(pokemon: Pokemon, onBack: () -> Unit) {
+private fun PokemonDetail(
+    pokemon: Pokemon,
+    onBack: () -> Unit,
+    isFavorite: Boolean,
+    onToggleFavorite: () -> Unit
+) {
     val mainColor = typeColor(pokemon.types.firstOrNull())
 
     DetailLayout {
@@ -58,6 +81,8 @@ private fun PokemonDetail(pokemon: Pokemon, onBack: () -> Unit) {
             imageUrl = pokemon.imageUrl,
             colors = listOf(mainColor, mainColor.copy(alpha = 0.55f)),
             onBack = onBack,
+            isFavorite = isFavorite,
+            onToggleFavorite = onToggleFavorite,
             tags = pokemon.types.map { typeName(it) to typeColor(it).darker() } +
                 listOfNotNull(
                     ("Legendario" to Color(0xFFB8860B)).takeIf { pokemon.isLegendary },

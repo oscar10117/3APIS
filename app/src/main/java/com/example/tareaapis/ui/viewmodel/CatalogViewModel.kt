@@ -18,8 +18,19 @@ import kotlinx.coroutines.launch
 open class CatalogViewModel<Item, Detail>(
     private val loadItems: suspend () -> Result<List<Item>>,
     private val loadDetail: suspend (id: Int) -> Result<Detail>,
-    private val matches: (item: Item, query: String) -> Boolean
+    private val matches: (item: Item, query: String) -> Boolean,
+    /** Si no es null, el catálogo muestra un botón "Actualizar" que vuelve a descargar el listado. */
+    private val refreshItems: (suspend () -> Result<List<Item>>)? = null
 ) : ViewModel() {
+
+    val canRefresh: Boolean = refreshItems != null
+
+    private val _refreshing = MutableStateFlow(false)
+    val refreshing: StateFlow<Boolean> = _refreshing.asStateFlow()
+
+    /** Mensaje de una sola vez tras actualizar (éxito o error); la pantalla lo muestra y lo limpia. */
+    private val _message = MutableStateFlow<String?>(null)
+    val message: StateFlow<String?> = _message.asStateFlow()
 
     private val allItems = MutableStateFlow<UiState<List<Item>>>(UiState.Loading)
 
@@ -54,6 +65,27 @@ open class CatalogViewModel<Item, Detail>(
             allItems.value = UiState.Loading
             allItems.value = loadItems().toUiState()
         }
+    }
+
+    /** A diferencia de [reloadItems], si falla la red se conserva el listado que ya se ve. */
+    fun refresh() {
+        val refresh = refreshItems ?: return
+        if (_refreshing.value) return
+        viewModelScope.launch {
+            _refreshing.value = true
+            refresh().fold(
+                onSuccess = {
+                    allItems.value = UiState.Success(it)
+                    _message.value = "Lista actualizada"
+                },
+                onFailure = { _message.value = "No se pudo actualizar: ${it.message}" }
+            )
+            _refreshing.value = false
+        }
+    }
+
+    fun messageShown() {
+        _message.value = null
     }
 
     fun openDetail(id: Int) {

@@ -18,8 +18,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.FilledTonalIconButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -71,7 +75,9 @@ fun DetailHeader(
     colors: List<Color>,
     onBack: () -> Unit,
     tags: List<Pair<String, Color>> = emptyList(),
-    portrait: Boolean = false
+    portrait: Boolean = false,
+    isFavorite: Boolean = false,
+    onToggleFavorite: (() -> Unit)? = null
 ) {
     Box(
         Modifier
@@ -130,6 +136,21 @@ fun DetailHeader(
             )
         ) {
             Text("←", fontSize = 20.sp)
+        }
+        if (onToggleFavorite != null) {
+            FilledTonalIconButton(
+                onClick = onToggleFavorite,
+                modifier = Modifier.align(Alignment.TopEnd).padding(10.dp),
+                colors = IconButtonDefaults.filledTonalIconButtonColors(
+                    containerColor = Color.White.copy(alpha = 0.25f),
+                    contentColor = Color.White
+                )
+            ) {
+                Icon(
+                    imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                    contentDescription = if (isFavorite) "Quitar de favoritos" else "Agregar a favoritos"
+                )
+            }
         }
     }
 }

@@ -11,6 +11,12 @@ data class PokemonSummary(
     val imageUrl: String
 )
 
+/** Pokémon marcado como favorito, con la nota personal del usuario (si escribió una). */
+data class FavoritePokemon(
+    val pokemon: PokemonSummary,
+    val note: String?
+)
+
 data class Pokemon(
     val id: Int,
     val name: String,
@@ -30,7 +36,10 @@ data class Pokemon(
     val abilities: List<String>,
     val stats: List<Stat>,
     val moves: List<String>
-)
+) {
+    /** Se usa al marcar favorito desde el detalle. */
+    fun toSummary(): PokemonSummary = PokemonSummary(id = id, name = name, imageUrl = imageUrl.orEmpty())
+}
 
 // ---------- Rick and Morty ----------
 
