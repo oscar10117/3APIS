@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "534971787773",
+    "project_id": "apis-83d3e",
+    "storage_bucket": "apis-83d3e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:534971787773:android:72395a1de5fdd5d7a45194",
+        "android_client_info": {
+          "package_name": "com.example.tareaapis"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD74_8u6yxlmj1uzoM14RCM9P24qePLbaU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
