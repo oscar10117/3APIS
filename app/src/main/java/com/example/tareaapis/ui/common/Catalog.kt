@@ -1,4 +1,4 @@
-package com.example.tareaapis.ui.components
+package com.example.tareaapis.ui.common
 
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
@@ -40,7 +40,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
-import com.example.tareaapis.ui.viewmodel.CatalogViewModel
 
 /**
  * Pantalla genérica: buscador + cuadrícula con imágenes, y al tocar un elemento su detalle.

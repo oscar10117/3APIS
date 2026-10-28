@@ -1,5 +1,6 @@
 package com.example.tareaapis.data.api
 
+import com.example.tareaapis.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -31,6 +32,28 @@ object ApiClient {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(T::class.java)
+
+    // La Edge Function exige la API key en el header Authorization.
+    private val cloudHttpClient: OkHttpClient by lazy {
+        httpClient.newBuilder()
+            .addInterceptor { chain ->
+                chain.proceed(
+                    chain.request().newBuilder()
+                        .header("Authorization", "Bearer ${BuildConfig.SQLITECLOUD_APIKEY}")
+                        .build()
+                )
+            }
+            .build()
+    }
+
+    val sqliteCloudApi: SqliteCloudApi by lazy {
+        Retrofit.Builder()
+            .baseUrl("https://localhost/")
+            .client(cloudHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(SqliteCloudApi::class.java)
+    }
 
     val pokeApi: PokeApi by lazy { create(POKE_API_URL) }
     val rickAndMortyApi: RickAndMortyApi by lazy { create(RICK_AND_MORTY_URL) }

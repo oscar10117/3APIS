@@ -1,4 +1,4 @@
-package com.example.tareaapis.ui.screens
+package com.example.tareaapis.ui.marvel
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -7,15 +7,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.tareaapis.domain.model.Hero
 import com.example.tareaapis.domain.model.HeroAlignment
-import com.example.tareaapis.ui.components.CatalogCard
-import com.example.tareaapis.ui.components.CatalogScreen
-import com.example.tareaapis.ui.components.DetailHeader
-import com.example.tareaapis.ui.components.DetailLayout
-import com.example.tareaapis.ui.components.InfoRow
-import com.example.tareaapis.ui.components.PillSection
-import com.example.tareaapis.ui.components.PropertySection
-import com.example.tareaapis.ui.components.StatsSection
-import com.example.tareaapis.ui.viewmodel.MarvelViewModel
+import com.example.tareaapis.ui.common.CatalogCard
+import com.example.tareaapis.ui.common.CatalogScreen
+import com.example.tareaapis.ui.common.DetailHeader
+import com.example.tareaapis.ui.common.DetailLayout
+import com.example.tareaapis.ui.common.InfoRow
+import com.example.tareaapis.ui.common.PillSection
+import com.example.tareaapis.ui.common.PropertySection
+import com.example.tareaapis.ui.common.StatsSection
 
 private val MarvelRed = Color(0xFFE23636)
 private val MarvelDark = Color(0xFF6B0F0F)

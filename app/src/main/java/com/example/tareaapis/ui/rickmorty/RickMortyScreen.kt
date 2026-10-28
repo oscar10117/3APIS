@@ -1,4 +1,4 @@
-package com.example.tareaapis.ui.screens
+package com.example.tareaapis.ui.rickmorty
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -7,13 +7,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.tareaapis.domain.model.CharacterStatus
 import com.example.tareaapis.domain.model.RickMortyCharacter
-import com.example.tareaapis.ui.components.CatalogCard
-import com.example.tareaapis.ui.components.CatalogScreen
-import com.example.tareaapis.ui.components.DetailHeader
-import com.example.tareaapis.ui.components.DetailLayout
-import com.example.tareaapis.ui.components.InfoRow
-import com.example.tareaapis.ui.components.PropertySection
-import com.example.tareaapis.ui.viewmodel.RickMortyViewModel
+import com.example.tareaapis.ui.common.CatalogCard
+import com.example.tareaapis.ui.common.CatalogScreen
+import com.example.tareaapis.ui.common.DetailHeader
+import com.example.tareaapis.ui.common.DetailLayout
+import com.example.tareaapis.ui.common.InfoRow
+import com.example.tareaapis.ui.common.PropertySection
 
 private val PortalGreen = Color(0xFF2E9E5B)
 private val PortalDark = Color(0xFF0F3D2A)

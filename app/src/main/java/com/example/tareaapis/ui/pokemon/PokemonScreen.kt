@@ -1,4 +1,4 @@
-package com.example.tareaapis.ui.screens
+package com.example.tareaapis.ui.pokemon
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,17 +17,16 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.example.tareaapis.domain.model.Pokemon
-import com.example.tareaapis.ui.components.CatalogCard
-import com.example.tareaapis.ui.components.CatalogScreen
-import com.example.tareaapis.ui.components.DetailHeader
-import com.example.tareaapis.ui.components.DetailLayout
-import com.example.tareaapis.ui.components.InfoRow
-import com.example.tareaapis.ui.components.PillSection
-import com.example.tareaapis.ui.components.PropertySection
-import com.example.tareaapis.ui.components.SectionCard
-import com.example.tareaapis.ui.components.StatsSection
-import com.example.tareaapis.ui.viewmodel.FavoritesViewModel
-import com.example.tareaapis.ui.viewmodel.PokemonViewModel
+import com.example.tareaapis.ui.common.CatalogCard
+import com.example.tareaapis.ui.common.CatalogScreen
+import com.example.tareaapis.ui.common.DetailHeader
+import com.example.tareaapis.ui.common.DetailLayout
+import com.example.tareaapis.ui.common.InfoRow
+import com.example.tareaapis.ui.common.PillSection
+import com.example.tareaapis.ui.common.PropertySection
+import com.example.tareaapis.ui.common.SectionCard
+import com.example.tareaapis.ui.common.StatsSection
+import com.example.tareaapis.ui.favorites.FavoritesViewModel
 
 @Composable
 fun PokemonScreen(

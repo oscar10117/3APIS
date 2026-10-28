@@ -1,4 +1,4 @@
-package com.example.tareaapis.ui.screens
+package com.example.tareaapis.ui.favorites
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
@@ -33,10 +33,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.example.tareaapis.domain.model.FavoritePokemon
-import com.example.tareaapis.ui.components.CatalogCard
-import com.example.tareaapis.ui.components.EmptyBox
-import com.example.tareaapis.ui.components.LoadingBox
-import com.example.tareaapis.ui.viewmodel.FavoritesViewModel
+import com.example.tareaapis.ui.common.CatalogCard
+import com.example.tareaapis.ui.common.EmptyBox
+import com.example.tareaapis.ui.common.LoadingBox
 
 /** Pokémon favoritos guardados en Room: tres estados (cargando, vacío y con datos). Sin red. */
 @Composable

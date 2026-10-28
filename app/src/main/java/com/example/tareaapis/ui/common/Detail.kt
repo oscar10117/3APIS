@@ -1,4 +1,4 @@
-package com.example.tareaapis.ui.components
+package com.example.tareaapis.ui.common
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

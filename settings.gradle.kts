@@ -1,4 +1,4 @@
-pluginManagement {
+﻿pluginManagement {
     repositories {
         google {
             content {
@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "tareaApis"
 include(":app")
- 
+

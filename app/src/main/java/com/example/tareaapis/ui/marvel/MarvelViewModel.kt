@@ -1,7 +1,8 @@
-package com.example.tareaapis.ui.viewmodel
+package com.example.tareaapis.ui.marvel
 
 import com.example.tareaapis.data.repository.MarvelRepository
 import com.example.tareaapis.domain.model.Hero
+import com.example.tareaapis.ui.common.CatalogViewModel
 
 class MarvelViewModel(
     repository: MarvelRepository = MarvelRepository()

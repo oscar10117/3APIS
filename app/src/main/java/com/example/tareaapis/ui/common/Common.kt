@@ -1,4 +1,4 @@
-package com.example.tareaapis.ui.components
+package com.example.tareaapis.ui.common
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -23,7 +23,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.tareaapis.ui.viewmodel.UiState
 
 /** Dibuja carga / error y delega el contenido cuando todo sale bien. */
 @Composable

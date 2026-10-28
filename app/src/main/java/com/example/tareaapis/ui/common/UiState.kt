@@ -1,4 +1,4 @@
-package com.example.tareaapis.ui.viewmodel
+package com.example.tareaapis.ui.common
 
 sealed interface UiState<out T> {
     data object Loading : UiState<Nothing>

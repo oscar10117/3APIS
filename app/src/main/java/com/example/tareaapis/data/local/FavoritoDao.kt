@@ -19,6 +19,12 @@ interface FavoritoDao {
     @Query("SELECT id FROM favoritos")
     fun observarIdsFavoritos(): Flow<List<Int>>
 
+    @Query("SELECT * FROM favoritos")
+    suspend fun obtenerTodos(): List<FavoritoEntity>
+
+    @Query("SELECT * FROM favoritos WHERE id = :id")
+    suspend fun obtenerPorId(id: Int): FavoritoEntity?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertar(favorito: FavoritoEntity)
 

@@ -1,4 +1,4 @@
-package com.example.tareaapis.ui.viewmodel
+package com.example.tareaapis.ui.common
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

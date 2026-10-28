@@ -1,14 +1,14 @@
-package com.example.tareaapis.ui.viewmodel
+package com.example.tareaapis.ui.pokemon
 
-import android.app.Application
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.tareaapis.data.local.PokemonDatabase
+import com.example.tareaapis.data.api.ApiClient
+import com.example.tareaapis.data.repository.CloudPokemonDetailStore
 import com.example.tareaapis.data.repository.PokemonRepository
 import com.example.tareaapis.domain.model.Pokemon
 import com.example.tareaapis.domain.model.PokemonSummary
+import com.example.tareaapis.ui.common.CatalogViewModel
 
 class PokemonViewModel(
     repository: PokemonRepository
@@ -21,11 +21,10 @@ class PokemonViewModel(
     refreshItems = repository::refreshList
 ) {
     companion object {
-        // El repositorio necesita la base de datos Room, que necesita el contexto de la aplicación
+        // El repositorio guarda el detalle en SQLite Cloud a través de su API REST
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
-                val app = this[APPLICATION_KEY] as Application
-                PokemonViewModel(PokemonRepository(PokemonDatabase.obtener(app).pokemonCacheDao()))
+                PokemonViewModel(PokemonRepository(CloudPokemonDetailStore(ApiClient.sqliteCloudApi)))
             }
         }
     }
